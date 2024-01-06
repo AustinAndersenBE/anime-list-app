@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://example.com/userAuth.json",
+    "title": "User Authentication",
+    "description": "Schema for user authentication data validation",
+    "type": "object",
+    "properties": {
+      "username": {
+        "type": "string",
+        "description": "The user's unique username"
+      },
+      "password": {
+        "type": "string",
+        "description": "The user's password"
+      }
+    },
+    "additionalProperties": false,
+    "required": [
+      "username",
+      "password"
+    ]
+  }
