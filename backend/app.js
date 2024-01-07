@@ -2,21 +2,28 @@ const express = require("express");
 const cors = require("cors");
 const passport = require("passport");
 const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
 
 const { NotFoundError } = require("./expressError");
-const { configureJWTStrategy } = require("./config/passportConfig");
+const { configurePassportStrategies } = require("./config/passportConfig");
 const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/users");
+const postRoutes = require("./routes/posts");
 
 const app = express();
 
+app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
 app.use(morgan("tiny"));
 
 app.use(passport.initialize());
-configureJWTStrategy(passport);
+configurePassportStrategies(passport);
 
 app.use("/auth", authRoutes);
+app.use("/users", userRoutes);
+app.use("/posts", postRoutes);
+
 
 app.use(function (req, res, next) {
     return next(new NotFoundError());

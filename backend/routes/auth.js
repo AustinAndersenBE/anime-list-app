@@ -25,7 +25,16 @@ router.post("/token", async (req, res, next) => {
       return next(new UnauthorizedError("Invalid username/password"));
     }
     const token = createToken(user);
-    return res.json({ token });
+    
+    
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', // set to true if HTTPS/production
+      maxAge: 86400000, 
+      sameSite: 'strict'
+    });
+
+    return res.status(200).end();
   })(req, res, next);
 });
 
@@ -38,11 +47,20 @@ router.post("/register", async (req, res, next) => {
       throw new BadRequestError(errs);
     }
 
-
     const newUser = await User.register({ ...req.body, isAdmin: false });
 
     const token = createToken({ username: newUser.username, isAdmin: newUser.isAdmin });
-    return res.status(201).json({ token });
+
+    
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', 
+      maxAge: 86400000,
+      sameSite: 'strict'
+    });
+
+
+    return res.status(201).end();
   } catch (err) {
     return next(err);
   }
