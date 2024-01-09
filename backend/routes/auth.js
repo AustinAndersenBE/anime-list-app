@@ -9,7 +9,7 @@ const { BadRequestError, UnauthorizedError } = require("../expressError");
 
 const router = new express.Router();
 
-// POST /token
+/** POST /auth/token */ 
 router.post("/token", async (req, res, next) => {
   const validator = jsonschema.validate(req.body, userAuthSchema);
   if (!validator.valid) {
@@ -17,6 +17,7 @@ router.post("/token", async (req, res, next) => {
     return next(new BadRequestError(errs));
   }
 
+  // returns a middleware function that will be immediately invoked
   passport.authenticate("local", { session: false }, (err, user, info) => {
     if (err) {
       return next(err);
@@ -26,10 +27,9 @@ router.post("/token", async (req, res, next) => {
     }
     const token = createToken(user);
     
-    
     res.cookie('token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // set to true if HTTPS/production
+      secure: process.env.NODE_ENV === 'production', //set to secure if in production
       maxAge: 86400000, 
       sameSite: 'strict'
     });
@@ -38,7 +38,7 @@ router.post("/token", async (req, res, next) => {
   })(req, res, next);
 });
 
-// POST /register
+/** POST /auth/register */
 router.post("/register", async (req, res, next) => {
   try {
     const validator = jsonschema.validate(req.body, userRegisterSchema);
@@ -47,9 +47,8 @@ router.post("/register", async (req, res, next) => {
       throw new BadRequestError(errs);
     }
 
-    const newUser = await User.register({ ...req.body, isAdmin: false });
-
-    const token = createToken({ username: newUser.username, isAdmin: newUser.isAdmin });
+    const newUser = await User.register({ ...req.body, isAdmin: false }); 
+    const token = createToken({ id: newUser.id, isAdmin: newUser.isAdmin });
 
     
     res.cookie('token', token, {
@@ -66,4 +65,11 @@ router.post("/register", async (req, res, next) => {
   }
 });
 
+/** POST /auth/logout */
+router.post("/logout", (req, res) => {
+  res.clearCookie('token');
+  return res.status(200).end();
+});
+
 module.exports = router;
+

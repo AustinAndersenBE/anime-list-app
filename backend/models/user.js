@@ -4,6 +4,7 @@ const { NotFoundError, BadRequestError, UnauthorizedError } = require('../expres
 const { BCRYPT_WORK_FACTOR } = require('../config.js');
 
 class User {
+
     static async authenticate(username, password) {
       const user = await prisma.user.findUnique({
         where: { username },
@@ -13,20 +14,16 @@ class User {
         delete user.passwordHash;
         return user;
       }
-  
       throw new UnauthorizedError("Invalid username/password");
     }
-  
-    static async register({ username, password, firstName, lastName, email, isAdmin }) {
+ 
+    static async register({ username, email, password, isAdmin}) {
       const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
-  
       try {
         const newUser = await prisma.user.create({
           data: {
             username,
             passwordHash: hashedPassword,
-            firstName,
-            lastName,
             email,
             isAdmin,
           },

@@ -20,21 +20,25 @@ model User {
 model UserAnimeList {
   id          Int @id @default(autoincrement())
   userId      Int
-  animeApiId  String
+  externalAnimeId  String // migrate database later
   animeTitle  String
-  status      String
-  rating      Int?
-  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status      String // see if you can enforce validation/options
+  rating      Int? // change to float later
+  user        User  @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+
+
+
 model Post {
-  id         Int @id @default(autoincrement())
-  userId     Int
-  animeApiId String?
+  id            Int @id @default(autoincrement())
+  userId        Int
+  externalAnimeId    String?
   episodeNumber Int?
-  title String
-  content String
-  postDate DateTime @default(now())
-  lastEdited DateTime @updatedAt
-  user User @relation(fields: [userId], references: [id])
+  title         String
+  content       String
+  createdDate      DateTime @default(now()) // make non modifiable
+  updatedDate    DateTime @updatedAt
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
 }

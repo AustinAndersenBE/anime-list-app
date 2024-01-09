@@ -22,10 +22,16 @@ function ensureAdmin(req, res, next) {
 }
 
 function ensureCorrectUserOrAdmin(req, res, next) {
-  if (!(req.user && (req.user.isAdmin || req.user.username === req.params.username))) {
+  if (!req.user) {
     return next(new UnauthorizedError());
   }
-  return next();
+  if ( req.user.id == req.params.id ) {
+    return next();
+  }
+  if (req.user.isAdmin) {
+    return next();
+  }
+  return next(new UnauthorizedError());
 }
 
 module.exports = {
