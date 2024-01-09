@@ -7,6 +7,12 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum AnimeStatus {
+  WATCHED
+  NOT_WATCHED
+  WILL_WATCH
+}
+
 model User {
   id            Int @id @default(autoincrement())
   username      String @unique
@@ -22,12 +28,10 @@ model UserAnimeList {
   userId      Int
   externalAnimeId  String // migrate database later
   animeTitle  String
-  status      String // see if you can enforce validation/options
-  rating      Int? // change to float later
+  status      AnimeStatus
+  rating      Float?
   user        User  @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
-
-
 
 
 model Post {
@@ -37,7 +41,7 @@ model Post {
   episodeNumber Int?
   title         String
   content       String
-  createdDate      DateTime @default(now()) // make non modifiable
+  createdDate      DateTime @default(now()) // enforce this at application level
   updatedDate    DateTime @updatedAt
   user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
