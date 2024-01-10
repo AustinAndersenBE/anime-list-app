@@ -9,7 +9,7 @@ export const login = createAsyncThunk(
   'auth/login',
   async (userData, { dispatch, rejectWithValue }) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/auth/token`, userData);
+      const response = await axios.post(`${API_BASE_URL}/auth/token`, userData, { withCredentials: true });
       if (response.status === 200) {
         dispatch(checkAuthStatus());
       }
@@ -24,7 +24,7 @@ export const signup = createAsyncThunk(
   'auth/signup',
   async (userData, { dispatch, rejectWithValue }) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/auth/register`, userData);
+      const response = await axios.post(`${API_BASE_URL}/auth/register`, userData, { withCredentials: true });
       if (response.status === 201) {
         dispatch(checkAuthStatus());
       }
@@ -40,7 +40,7 @@ export const checkAuthStatus = createAsyncThunk(
   'auth/checkStatus',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/auth/status`); //returns { isAuthenticated, user }
+      const response = await axios.get(`${API_BASE_URL}/auth/status`, { withCredentials: true });
       return response.data;
     } catch (error) {
       return rejectWithValue('An error occured while logging in.');

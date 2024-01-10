@@ -13,7 +13,10 @@ const postRoutes = require("./routes/posts");
 const app = express();
 
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', // allow only frontend app to make requests
+  credentials: true, // allow credentials
+}));
 app.use(express.json());
 app.use(morgan("tiny"));
 

@@ -8,6 +8,8 @@ const userRegisterSchema = require("../schemas/userRegister.json");
 const { BadRequestError, UnauthorizedError } = require("../expressError");
 const { authenticateJWT } = require("../middleware/auth");
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 const router = new express.Router();
 
 /** POST /auth/token */ 
@@ -27,12 +29,13 @@ router.post("/token", async (req, res, next) => {
       return next(new UnauthorizedError("Invalid username/password"));
     }
     const token = createToken(user);
+    console.log("Token created:", token);
     
     res.cookie('token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', //set to secure if in production
+      secure: isProduction,
       maxAge: 86400000, 
-      sameSite: 'strict'
+      sameSite: 'lax'
     });
 
     return res.status(200).end();
@@ -54,9 +57,9 @@ router.post("/register", async (req, res, next) => {
     
     res.cookie('token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', 
+      secure: isProduction,
       maxAge: 86400000,
-      sameSite: 'strict'
+      sameSite: 'lax'
     });
 
 

@@ -3,10 +3,14 @@ const { UnauthorizedError } = require("../expressError");
 
 function authenticateJWT(req, res, next) {
   passport.authenticate("jwt", { session: false }, (err, user, info) => {
+    console.log("JWT authentication error:", err);
+    console.log("JWT authentication info:", info);
     if (err) {
       return next(err);
     }
     if (!user) {
+      // checking for why authentication failed
+      console.log("JWT authentication failed:", info);
       return next(new UnauthorizedError());
     }
     req.user = user;
