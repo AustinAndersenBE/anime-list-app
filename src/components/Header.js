@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import './Header.css';
+import SignupButton from './SignupButton';
+import LoginButton from './LoginButton';
 
 const Header = () => {
   const { isAuthenticated, user } = useAuth();
@@ -16,8 +18,8 @@ const Header = () => {
         </div>
       ) : (
         <div className="auth-buttons">
-          <Link to="/login" className="button">Login</Link>
-          <Link to="/signup" className="button button-signup">Sign Up</Link>
+          <LoginButton />
+          <SignupButton />
         </div>
       )}
     </header>

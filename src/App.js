@@ -1,10 +1,13 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import './App.css';
-
+import store from '../src/store/store';
 
 import HomePage from './components/HomePage';
-import store from './store'; 
+import LoginPage from './components/LoginPage';
+import SignupPage from './components/SignupPage';
+import Header from './components/Header';
+
 
 function App() {
   return (
@@ -13,7 +16,9 @@ function App() {
         <div className="app">
           <Header />
           <Routes>
-            <Route exact path="/" element={<HomePage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
           </Routes>
         </div>
       </Router>
