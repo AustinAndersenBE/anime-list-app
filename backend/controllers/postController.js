@@ -23,7 +23,7 @@ async function getPostsByUserId(userId) {
         userId: parseInt(userId),
       },
       orderBy: {
-        postDate: 'desc',
+        createdDate: 'desc',
       },
     });
     return posts;

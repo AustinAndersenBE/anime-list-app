@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://example.com/post.json",
+    "title": "Post",
+    "description": "Schema for post data validation",
+    "type": "object",
+    "properties": {
+      "title": {
+        "type": "string",
+        "description": "The title of the post",
+        "minLength": 3,
+        "maxLength": 100
+      },
+      "content": {
+        "type": "string",
+        "description": "The content of the post",
+        "minLength": 10
+      }
+    },
+    "additionalProperties": false,
+    "required": [
+      "title",
+      "content"
+    ]
+  }

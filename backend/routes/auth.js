@@ -28,7 +28,7 @@ router.post("/token", async (req, res, next) => {
     if (!user) {
       return next(new UnauthorizedError("Invalid username/password"));
     }
-    const token = createToken(user);
+    const token = createToken({ username: user.username, id: user.id, isAdmin: user.isAdmin });
     console.log("Token created:", token);
     
     res.cookie('token', token, {
@@ -52,7 +52,7 @@ router.post("/register", async (req, res, next) => {
     }
 
     const newUser = await User.register({ ...req.body, isAdmin: false }); 
-    const token = createToken({ id: newUser.id, isAdmin: newUser.isAdmin });
+    const token = createToken({ username: newUser.username, id: newUser.id, isAdmin: newUser.isAdmin });
 
     
     res.cookie('token', token, {
@@ -82,6 +82,7 @@ router.get("/status", authenticateJWT, (req, res) => {
     user: {
       id: req.user.id,
       isAdmin: req.user.isAdmin,
+      username: req.user.username,
     }
   });
 });

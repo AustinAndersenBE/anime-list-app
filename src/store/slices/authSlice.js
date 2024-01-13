@@ -11,7 +11,7 @@ export const login = createAsyncThunk(
     try {
       const response = await axios.post(`${API_BASE_URL}/auth/token`, userData, { withCredentials: true });
       if (response.status === 200) {
-        dispatch(checkAuthStatus());
+        await dispatch(checkAuthStatus());
       }
       return response.data;
     } catch (error) {
@@ -26,7 +26,7 @@ export const signup = createAsyncThunk(
     try {
       const response = await axios.post(`${API_BASE_URL}/auth/register`, userData, { withCredentials: true });
       if (response.status === 201) {
-        dispatch(checkAuthStatus());
+        await dispatch(checkAuthStatus());
       }
       return response.data;
     } catch (error) {
@@ -44,6 +44,21 @@ export const checkAuthStatus = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue('An error occured while logging in.');
+    }
+  }
+);
+
+export const logout = createAsyncThunk(
+  'auth/logout',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/auth/logout`, {}, { withCredentials: true });
+      if (response.status === 200) {
+        return true;
+      }
+      return rejectWithValue('Logout failed.');
+    } catch (error) {
+      return rejectWithValue('Logout failed.');
     }
   }
 );
@@ -95,7 +110,20 @@ const authSlice = createSlice({
       .addCase(checkAuthStatus.rejected, (state, action) => {
         state.loading = false;
         state.error = "An error has occured checking authentication";
-      });
+      })
+      .addCase(logout.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(logout.fulfilled, (state, action) => {
+        state.loading = false;
+        state.isAuthenticated = false;
+        state.user = null;
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
   },
 });
 

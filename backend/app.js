@@ -9,6 +9,7 @@ const { configurePassportStrategies } = require("./config/passportConfig");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/users");
 const postRoutes = require("./routes/posts");
+const animeRoutes = require("./routes/anime");
 
 const app = express();
 
@@ -26,6 +27,7 @@ configurePassportStrategies(passport);
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
+app.use("/anime", animeRoutes);
 
 
 app.use(function (req, res, next) {

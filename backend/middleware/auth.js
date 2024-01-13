@@ -38,8 +38,25 @@ function ensureCorrectUserOrAdmin(req, res, next) {
   return next(new UnauthorizedError());
 }
 
+function ensureCorrectUser(req, res, next) {
+  if (!req.user || req.user.id !== req.body.userId) {
+    return next(new UnauthorizedError());
+  }
+  return next();
+}
+
+// in get requests, there is no req.body so we just check for !req.user
+function ensureAuthenticated(req, res, next) {
+  if (!req.user) {
+    return next(new UnauthorizedError());
+  }
+  return next();
+}
+
 module.exports = {
   authenticateJWT,
   ensureAdmin,
   ensureCorrectUserOrAdmin,
+  ensureCorrectUser,
+  ensureAuthenticated
 };

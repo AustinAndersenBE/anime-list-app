@@ -9,6 +9,7 @@ function createToken(user) {
   let payload = {
     id: user.id,
     isAdmin: user.isAdmin || false,
+    username: user.username
   };
 
   // expiration time for the JWT

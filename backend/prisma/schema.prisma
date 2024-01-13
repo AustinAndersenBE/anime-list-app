@@ -9,7 +9,7 @@ generator client {
 
 enum AnimeStatus {
   WATCHED
-  NOT_WATCHED
+  NOT_WATCHED // get rid of the this later
   WILL_WATCH
 }
 
@@ -26,11 +26,13 @@ model User {
 model UserAnimeList {
   id          Int @id @default(autoincrement())
   userId      Int
-  externalAnimeId  String // migrate database later
+  externalAnimeId  String
   animeTitle  String
   status      AnimeStatus
   rating      Float?
   user        User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, externalAnimeId], name: "userId_externalAnimeId")
 }
 
 
@@ -38,7 +40,7 @@ model Post {
   id            Int @id @default(autoincrement())
   userId        Int
   externalAnimeId    String?
-  episodeNumber Int?
+  episodeNumber Int? // deprecate this for now 
   title         String
   content       String
   createdDate      DateTime @default(now()) // enforce this at application level
