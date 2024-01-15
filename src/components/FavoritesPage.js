@@ -10,6 +10,7 @@ import * as Yup from 'yup';
 import './FavoritesPage.css';
 import axios from 'axios';
 
+// Dynamic rating validation schema
 const ratingSchema = Yup.lazy((values) => {
   const schemaFields = {};
   for (const key in values) {
@@ -24,6 +25,7 @@ const ratingSchema = Yup.lazy((values) => {
   return Yup.object().shape(schemaFields);
 });
 
+// Ratings state used to keep track of user's ratings
 const FavoritesPage = () => {
   const [ratings, setRatings] = useState({});
   const dispatch = useDispatch();
@@ -33,14 +35,12 @@ const FavoritesPage = () => {
   });
   const { user } = useSelector(state => state.auth);
   const { favorites, loading, error } = useSelector(state => state.user);
-  const [initialLoad, setInitialLoad] = useState(true);
 
   useEffect(() => {
-    if (user && initialLoad) {
+    if (user) {
       dispatch(getFavorites(user.id));
-      setInitialLoad(false);
     }
-  }, [dispatch, user, initialLoad]);
+  }, [dispatch, user]);
 
   useEffect(() => {
     if (favorites) {
