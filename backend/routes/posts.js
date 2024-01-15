@@ -14,7 +14,7 @@ router.get('/anime/:animeId', authenticateJWT, ensureCorrectUserOrAdmin, async (
   }
 });
 
-// getting all posts for a specific user
+// getting all posts for a specific user. maybe i should change name later
 router.get('/user/:userId', authenticateJWT, ensureAuthenticated, async (req, res, next) => {
   try {
     const userId = req.params.userId;

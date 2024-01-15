@@ -9,7 +9,7 @@ generator client {
 
 enum AnimeStatus {
   WATCHED
-  NOT_WATCHED // get rid of the this later
+  NOT_WATCHED // get rid of this later
   WILL_WATCH
 }
 
@@ -21,30 +21,38 @@ model User {
   isAdmin       Boolean @default(false)
   userAnimeList UserAnimeList[] // one-to-many
   posts         Post[]
+  following     UserFollow[] @relation("UserFollows")
+  followers     UserFollow[] @relation("UserFollowers")
+}
+
+model UserFollow {
+  followerId    Int
+  followingId   Int
+  follower      User @relation("UserFollowers", fields: [followerId], references: [id])
+  following     User @relation("UserFollows", fields: [followingId], references: [id])
+
+  @@id([followerId, followingId])
 }
 
 model UserAnimeList {
-  id          Int @id @default(autoincrement())
-  userId      Int
-  externalAnimeId  String
-  animeTitle  String
-  status      AnimeStatus
-  rating      Float?
-  user        User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          Int
+  externalAnimeId String
+  animeTitle      String
+  status          AnimeStatus
+  rating          Decimal? @db.Decimal(4,2)
+  user            User  @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@index([userId, externalAnimeId], name: "userId_externalAnimeId")
+  @@id([userId, externalAnimeId])
 }
 
-
 model Post {
-  id            Int @id @default(autoincrement())
-  userId        Int
-  externalAnimeId    String?
-  episodeNumber Int? // deprecate this for now 
-  title         String
-  content       String
-  createdDate      DateTime @default(now()) // enforce this at application level
-  updatedDate    DateTime @updatedAt
-  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
+  id              Int @id @default(autoincrement())
+  userId          Int
+  externalAnimeId String?
+  episodeNumber   Int? // deprecate this for now 
+  title           String
+  content         String
+  createdDate     DateTime @default(now()) // enforce this at application level
+  updatedDate     DateTime @updatedAt
+  user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

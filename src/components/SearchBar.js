@@ -28,6 +28,7 @@ const SearchBar = () => {
       <Link to="/airing-anime" className="airing-anime-text">Airing Anime</Link>
       {isAuthenticated && <Link to="/favorites" className="favorites-text">Favorites</Link>}
       {isAuthenticated && <Link to="/my-posts" className="my-posts-text">My Posts</Link>}
+      {isAuthenticated && <Link to="/following" className="following-text">Following</Link>}
       <form className="search-section" onSubmit={handleSubmit(handleSearch)}>
         <input
           type="text"

@@ -14,6 +14,9 @@ import AiringAnime from './components/AiringAnime';
 import FavoritesPage from './components/FavoritesPage';
 import PostForm from './components/PostForm';
 import MyPosts from './components/MyPosts';
+import FollowingPage from './components/FollowingPage';
+import PublicFavoritesPage from './components/PublicFavoritesPage';
+import PublicPostsPage from './components/PublicPostsPage'; 
 
 const App = () => {
   const dispatch = useDispatch();
@@ -36,6 +39,9 @@ const App = () => {
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="/post-form" element={<PostForm />} />
           <Route path="/my-posts" element={<MyPosts />} />
+          <Route path="/following" element={<FollowingPage />} />
+          <Route path="/public-users/:userId/favorites" element={<PublicFavoritesPage />} />
+          <Route path="/public-users/:userId/posts" element={<PublicPostsPage />} /> {/* New Route */}
         </Routes>
       </div>
     </Router>

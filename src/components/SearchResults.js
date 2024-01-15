@@ -28,7 +28,7 @@ const SearchResults = () => {
     if (favorites.includes(externalAnimeId)) {
       dispatch(removeFavorite({ userId: user.id, externalAnimeId }));
     } else {
-      dispatch(addFavorite({ userId: user.id, externalAnimeId, animeTitle: anime.title }));
+      dispatch(addFavorite({ userId: user.id, externalAnimeId, animeTitle: anime.title_english }));
     }
   };
 
@@ -47,7 +47,7 @@ const SearchResults = () => {
                 onClick={() => handleStarClick(anime)}
               />
             )}
-            {anime.title}
+            {anime.title_english}
           </li>
         ))}
       </ul>

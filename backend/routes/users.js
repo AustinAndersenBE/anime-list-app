@@ -34,6 +34,53 @@ router.get('/favorites', authenticateJWT, ensureAuthenticated, async (req, res, 
       where: {
         userId: Number(userId),
       },
+      orderBy: {
+        rating: 'desc',
+      },
+    });
+    res.status(200).json(favorites);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// POST users/favorites - Update multiple favorites' ratings
+router.post('/favorites/update-rating', authenticateJWT, ensureCorrectUser, async (req, res, next) => {
+  try {
+    const { ratings } = req.body;
+    const { id: userId } = req.user;
+
+    const updatePromises = ratings.map(ratingUpdate => {
+      return prisma.userAnimeList.update({
+        where: {
+          userId_externalAnimeId: {
+            userId: userId,
+            externalAnimeId: ratingUpdate.externalAnimeId
+          }
+        },
+        data: {
+          rating: ratingUpdate.rating
+        }
+      });
+    });
+
+    const updatedFavorites = await prisma.$transaction(updatePromises);
+    res.json(updatedFavorites);
+  } catch (error) {
+    console.error('Error updating favorites:', error);
+    next(error);
+  }
+});
+
+// GET users/public-users/:userId/favorites - Get a specific user's public favorites
+router.get('/public-users/:userId/favorites', authenticateJWT, ensureAuthenticated, async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+
+    const favorites = await prisma.userAnimeList.findMany({
+      where: {
+        userId: Number(userId),
+      },
     });
     res.status(200).json(favorites);
   } catch (error) {
@@ -111,6 +158,85 @@ router.post('/posts', authenticateJWT, ensureCorrectUser, async (req, res, next)
     next(error);
   }
 });
+
+// POST users/follow - Follow a user by username
+router.post('/follow', authenticateJWT, ensureCorrectUser, async (req, res, next) => {
+  try {
+    const { usernameToFollow } = req.body;
+    const { id: followerId } = req.user;
+
+    // Find the user to follow by username
+    const userToFollow = await prisma.user.findUnique({
+      where: {
+        username: usernameToFollow,
+      },
+    });
+
+    if (!userToFollow) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    const followingId = userToFollow.id;
+
+    // Prevent users from following themselves
+    if (followerId === followingId) {
+      return res.status(400).json({ message: "You cannot follow yourself." });
+    }
+
+    // Check if the following relationship already exists
+    const existingFollow = await prisma.userFollow.findUnique({
+      where: {
+        followerId_followingId: {
+          followerId: followerId,
+          followingId: followingId,
+        },
+      },
+    });
+
+    if (existingFollow) {
+      return res.status(400).json({ message: "You are already following this user." });
+    }
+
+    // Create a new follow relationship
+    const follow = await prisma.userFollow.create({
+      data: {
+        followerId: followerId,
+        followingId: followingId,
+      },
+    });
+
+    res.status(201).json(follow);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+
+// GET users/following - Get a list of users the current user is following
+router.get('/following', authenticateJWT, ensureAuthenticated, async (req, res, next) => {
+  try {
+    const { id: userId } = req.user;
+
+    const followingList = await prisma.userFollow.findMany({
+      where: {
+        followerId: userId,
+      },
+      include: {
+        following: true, // Include the details of the users being followed
+      },
+    });
+
+    // followingList is an array of UserFollow objects so extracting it gives us an array of User objects
+    const followingUsers = followingList.map(follow => follow.following);
+
+    res.status(200).json(followingUsers);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 
 
 module.exports = router;

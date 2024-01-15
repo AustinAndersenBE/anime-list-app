@@ -39,9 +39,11 @@ const PostForm = () => {
 
   const onSubmit = async (data) => {
     try {
+      const externalAnimeId = location.state?.externalAnimeId;
       const response = await axios.post(`${API_BASE_URL}/users/posts`, {
         ...data,
         userId: user.id,
+        externalAnimeId: externalAnimeId,
       });
       console.log(response.data);
       navigate('/my-posts');
