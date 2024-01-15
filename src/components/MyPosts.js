@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import './MyPosts.css';  // Import the CSS file
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -24,13 +25,13 @@ const MyPosts = () => {
   }, [user]);  // Add user as a dependency
 
   return (
-    <div>
+    <div className="my-posts">
       <h1>My Posts</h1>
       {posts.map(post => (
-        <div key={post.id}>
+        <div key={post.id} className="post">
           <h2>{post.title}</h2>
           <p>{post.content}</p>
-          <small>Last updated: {new Date(post.updatedDate).toLocaleDateString()}</small>
+          <small>Posted on: {new Date(post.createdDate).toLocaleDateString()}</small>
         </div>
       ))}
     </div>

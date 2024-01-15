@@ -1,0 +1,28 @@
+.my-posts {
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+  }
+  
+  .my-posts h1 {
+    color: #3399FF;
+  }
+  
+  .my-posts .post {
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .my-posts .post h2 {
+    color: #ffffff;
+  }
+  
+  .my-posts .post p {
+    color: #ffffff;
+  }
+  
+  .my-posts .post small {
+    color: #ffffff;
+  }

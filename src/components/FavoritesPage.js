@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as fasStar, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-import { getFavorites, removeFavorite, clearError } from '../store/slices/userSlice';
+import { getFavorites, removeFavorite } from '../store/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -41,12 +41,6 @@ const FavoritesPage = () => {
       setInitialLoad(false);
     }
   }, [dispatch, user, initialLoad]);
-
-  useEffect(() => {
-    return () => {
-      dispatch(clearError());
-    };
-  }, [dispatch]);
 
   useEffect(() => {
     if (favorites) {

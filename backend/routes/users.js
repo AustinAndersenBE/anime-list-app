@@ -81,6 +81,9 @@ router.get('/public-users/:userId/favorites', authenticateJWT, ensureAuthenticat
       where: {
         userId: Number(userId),
       },
+      orderBy: {
+        rating: 'desc',
+      },
     });
     res.status(200).json(favorites);
   } catch (error) {

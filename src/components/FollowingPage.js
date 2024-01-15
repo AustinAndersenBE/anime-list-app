@@ -3,7 +3,9 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import './FollowingPage.css';
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 
 const FollowingPage = () => {
   const [following, setFollowing] = useState([]);

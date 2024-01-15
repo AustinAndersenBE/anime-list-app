@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import './AiringAnime.css';
+
 
 const AiringAnime = () => {
   const [animeList, setAnimeList] = useState([]);
@@ -30,7 +32,6 @@ const AiringAnime = () => {
 
   return (
     <div>
-      <h1>Airing Anime</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input {...register("page")} placeholder="Page" />
         <input {...register("limit")} placeholder="Limit" />
@@ -38,13 +39,15 @@ const AiringAnime = () => {
       </form>
 
       <div className="anime-list">
-        {animeList.map(anime => (
-          <div key={anime.mal_id} className="anime-item">
-            <h2>{anime.title}</h2>
-            <img src={anime.images.jpg.image_url} alt={anime.title} />
+      {animeList.map(anime => (
+        <div key={anime.mal_id} className="anime-item">
+          <img src={anime.images.jpg.image_url} alt={anime.title_english} />
+          <div className="anime-content">
+            <h2>{anime.title_english}</h2>
             <p>{anime.synopsis}</p>
           </div>
-        ))}
+        </div>
+      ))}
       </div>
     </div>
   );

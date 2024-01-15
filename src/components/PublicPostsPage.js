@@ -26,12 +26,13 @@ const PublicPostsPage = () => {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="posts-container">
+    <div className="my-posts">
       <h1>User Posts:</h1>
       {posts.map(post => (
-        <div key={post.id} className="post-item">
+        <div key={post.id} className="post">
           <h2>{post.title}</h2>
           <p>{post.content}</p>
+          <small>Posted on: {new Date(post.createdDate).toLocaleDateString()}</small>
         </div>
       ))}
     </div>
