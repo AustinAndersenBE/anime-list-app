@@ -42,6 +42,8 @@ const FavoritesPage = () => {
     }
   }, [dispatch, user]);
 
+
+  // Creating an object with key, externalAnimeId and value, rating
   useEffect(() => {
     if (favorites) {
       const initialRatings = favorites.reduce((acc, anime) => {

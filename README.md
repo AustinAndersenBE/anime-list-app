@@ -1,70 +1,27 @@
-# Getting Started with Create React App
+# MyAnimeList
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a full-stack web application built using a combination of modern technologies and libraries. It is designed to provide a seamless user experience, with a focus on performance, security, and maintainability.
 
-## Available Scripts
+Technologies/API Used
+- React: A JavaScript library for building user interfaces.
+- React Hook Form: A lightweight and efficient library for managing form states in React.
+- Prisma: An open-source database toolkit used for database access, migrations, and administration.
+- Passport.js: An authentication middleware for Node.js, used to authenticate requests.
+- Node.js: A JavaScript runtime built on Chrome's V8 JavaScript engine, used for building the server-side of the application.
+- Express: A minimal and flexible Node.js web application framework, providing a robust set of features for web and mobile applications.
+- JWT (JSON Web Tokens): A compact, URL-safe means of representing claims to be transferred between two parties.
+Project Structure
+- Jikan Anime API
 
-In the project directory, you can run:
+The project is structured into two main parts: the client-side, built with React and React Hook Form, and the server-side, built with Node.js, Express, and Prisma. Passport.js and JWT are used for handling authentication.
 
-### `npm start`
+The client-side is organized into components, each representing a part of the user interface. The server-side is organized into routes, each handling a specific type of request.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Users can create accounts and be authenticated via JWT in HTTP-only cookies.
+- Can see Top Airing Anime via Jikan External API and filter the results by page and limit
+- Once logged in, can search for anime to add to their favorites list
+- Can sort their favorites list by submitting ratings from 0 to 10
+- Can create posts about the anime in their favorites list
+- Users can follow others users to see their favorites list and posts
