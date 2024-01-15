@@ -61,6 +61,7 @@ const FavoritesPage = () => {
     }
   };
 
+  // Using the favorites state, we map and create a new ratingsArray and then submit that along with the userId into our backend
   const submitAllRatings = () => {
     const ratingsArray = favorites.map(anime => ({
       externalAnimeId: anime.externalAnimeId,

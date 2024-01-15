@@ -16,7 +16,8 @@ import PostForm from './components/PostForm';
 import MyPosts from './components/MyPosts';
 import FollowingPage from './components/FollowingPage';
 import PublicFavoritesPage from './components/PublicFavoritesPage';
-import PublicPostsPage from './components/PublicPostsPage'; 
+import PublicPostsPage from './components/PublicPostsPage';
+import GuestRoute from './components/GuestRoute';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -32,8 +33,8 @@ const App = () => {
         <SearchBar />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/login" element={<GuestRoute><LoginPage /></GuestRoute>} />
+          <Route path="/signup" element={<GuestRoute><SignupPage /></GuestRoute>} />
           <Route path="/search-results" element={<SearchResults />} />
           <Route path="/airing-anime" element={<AiringAnime />} />
           <Route path="/favorites" element={<FavoritesPage />} />
@@ -41,7 +42,7 @@ const App = () => {
           <Route path="/my-posts" element={<MyPosts />} />
           <Route path="/following" element={<FollowingPage />} />
           <Route path="/public-users/:userId/favorites" element={<PublicFavoritesPage />} />
-          <Route path="/public-users/:userId/posts" element={<PublicPostsPage />} /> {/* New Route */}
+          <Route path="/public-users/:userId/posts" element={<PublicPostsPage />} />
         </Routes>
       </div>
     </Router>
