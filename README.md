@@ -25,3 +25,11 @@ The client-side is organized into components, each representing a part of the us
 - Can sort their favorites list by submitting ratings from 0 to 10
 - Can create posts about the anime in their favorites list
 - Users can follow others users to see their favorites list and posts
+
+# Standard user flow
+- Logging in or Sign Up with the buttons
+- Click on Airing Anime to see the top Airing Anime
+- Search for Anime using the search bar to add to their Favorites list with the star icon
+- In the favorites list users can click on the pencil icon to write posts about the anime
+- Users can follow users by clicking on the Following button
+- You can view a User's favorite list and their list of posts as well
