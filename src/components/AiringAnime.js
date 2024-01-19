@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import './AiringAnime.css';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 
 const AiringAnime = () => {
@@ -10,7 +11,7 @@ const AiringAnime = () => {
 
   const fetchAiringAnime = async (data) => {
     try {
-      const response = await axios.post(`http://localhost:3001/anime/airing`, data); //hard coded to debug
+      const response = await axios.post(`${API_BASE_URL}/anime/airing`, data); //hard coded to debug
       setAnimeList(response.data.data);
     } catch (error) {
       console.error(error);

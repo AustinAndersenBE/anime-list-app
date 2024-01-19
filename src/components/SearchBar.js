@@ -6,6 +6,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import './SearchBar.css';
 import { useForm } from 'react-hook-form';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 const SearchBar = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const SearchBar = () => {
 
   const handleSearch = async (data) => {
     try {
-      const response = await axios.get(`http://localhost:3001/anime/search/${data.searchTerm}`);
+      const response = await axios.get(`${API_BASE_URL}/anime/search/${data.searchTerm}`);
       const results = response.data;
       navigate('/search-results', { state: { results } });
     } catch (error) {
