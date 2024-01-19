@@ -42,8 +42,7 @@
     "eject-frontend": "react-scripts eject",
     "start-backend": "node backend/server.js",
     "start": "npm run start-backend & npm run start-frontend",
-    "build": "npm run build-frontend",
-    "postinstall": "prisma generate"
+    "build": "npm run build-frontend"
   },
   "eslintConfig": {
     "extends": [
