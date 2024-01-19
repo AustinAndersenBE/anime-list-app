@@ -1,7 +1,8 @@
 # MyAnimeList
 
-This project is a full-stack web application built using a combination of modern technologies and libraries. It is designed to provide a seamless user experience, with a focus on performance, security, and maintainability. 
-It is deloyed on https://my-anime-list-z6is.onrender.com using Render.
+This project is a full-stack web application built using a combination of modern technologies and libraries. It is designed to provide a seamless user experience, with a focus on performance, security, and maintainability.
+<br> 
+It is deployed on https://my-anime-list-z6is.onrender.com using Render.
 
 Technologies/API Used
 - React: A JavaScript library for building user interfaces.
