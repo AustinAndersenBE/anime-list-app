@@ -15,8 +15,8 @@ const app = express();
 
 app.use(cookieParser());
 app.use(cors({
-  origin: 'http://localhost:3000', // allow only frontend app to make requests
-  credentials: true, // allow credentials
+  origin: ['http://localhost:3000', 'https://my-anime-list-z6is.onrender.com'],
+  credentials: true,
 }));
 app.use(express.json());
 app.use(morgan("tiny"));
