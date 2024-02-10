@@ -35,3 +35,6 @@ The client-side is organized into components, each representing a part of the us
 - In the favorites list users can click on the pencil icon to write posts about the anime
 - Users can follow users by clicking on the Following button
 - You can view a User's favorite list and their list of posts as well
+
+# External API
+- https://jikan.moe/
