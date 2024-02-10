@@ -39,3 +39,6 @@ The client-side is organized into components, each representing a part of the us
 # External API
 - https://jikan.moe/
 - Jikan is an open-source, unofficial MyAnimeList API that provides users with a way to access and utilize data from the MyAnimeList website. Jikan’s features include an API that allows users to search for anime and manga, retrieve information about specific titles, and keep track of their watchlist and reading list. Jikan is free to use and offers a variety of wrappers in different programming languages.
+
+# Database Schema
+- Can be found in https://github.com/AustinAndersenBE/anime-list-app/blob/main/backend/prisma/schema.prisma
