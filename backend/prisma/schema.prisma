@@ -9,7 +9,7 @@ generator client {
 
 enum AnimeStatus {
   WATCHED
-  NOT_WATCHED // get rid of this later
+  NOT_WATCHED // deprecated feature
   WILL_WATCH
 }
 
