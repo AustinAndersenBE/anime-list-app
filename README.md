@@ -1,8 +1,8 @@
 # MyAnimeList
 
 This project is a full-stack web application built using a combination of modern technologies and libraries. It is designed to provide a seamless user experience, with a focus on performance, security, and maintainability.
+It provides a platform for users to search for their favorite anime, and create an account to create a list of their favorite animes. Users can follow other users and look at their favorite anime list and see the posts that other users have posted about the anime.
 <br> 
-It is deployed on https://my-anime-list-z6is.onrender.com using Render.
 
 Technologies/API Used
 - React: A JavaScript library for building user interfaces.
