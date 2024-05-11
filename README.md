@@ -1,6 +1,6 @@
 # MyAnimeList
 
-This project is a full-stack web application built using a combination of modern technologies and libraries. It is designed to provide a seamless user experience, with a focus on performance, security, and maintainability.
+This project is a full-stack web application built using a combination of modern technologies and libraries. It is designed with best practices in performance, security, and maintainability.
 It provides a platform for users to search for their favorite anime, and create an account to create a list of their favorite animes. Users can follow other users and look at their favorite anime list and see the posts that other users have posted about the anime.
 <br> 
 
